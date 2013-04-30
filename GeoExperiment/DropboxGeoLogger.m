@@ -20,6 +20,7 @@ typedef enum {
   CLLocationManager *_locationManager;
   LoggingState _loggingState;
   DBFile *_outputFile;
+  NSMutableDictionary *_outputDict;
 }
 
 @end
@@ -42,6 +43,7 @@ typedef enum {
     _locationManager = [[CLLocationManager alloc] init];
     [_locationManager setDelegate:self];
     _loggingState = NotLoggingState;
+    _outputFile = nil;
     
     [self useNewOutputFile];
   }
@@ -50,7 +52,27 @@ typedef enum {
 
 - (void)useNewOutputFile
 {
+  // write and close output file if it exists
+  if (_outputFile) {
+    [_outputFile writeData:[NSJSONSerialization dataWithJSONObject:_outputDict
+                                                            options:NSJSONWritingPrettyPrinted
+                                                              error:nil]
+                     error:nil];
+    [_outputFile close];
+  }
   
+  // create new output file based on current time.
+  NSDate *now = [NSDate date];
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
+  NSString *nowString = [dateFormatter stringFromDate:now];
+  nowString = [NSString stringWithFormat:@"%@.json", nowString];
+  DBPath *newFilePath = [[DBPath root] childPath:nowString];
+  _outputFile = [[DBFilesystem sharedFilesystem] createFile:newFilePath error:nil];
+  
+  // reset output dict
+  _outputDict = [[NSMutableDictionary alloc] init];
+  [_outputDict setObject:@[] forKey:@"locations"];
 }
 
 - (void)startLoggingWithSignificantChanges:(BOOL)significant
@@ -83,7 +105,13 @@ typedef enum {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
   NSLog(@"Locations updated! %@", locations);
-  // write them to dropbox!
+  
+  if (_loggingState != NotLoggingState) {
+    // write them to dropbox!
+    NSArray *existingLocations = [_outputDict objectForKey:@"locations"];
+    NSArray *newLocations = [existingLocations arrayByAddingObjectsFromArray:locations];
+    [_outputDict setObject:newLocations forKey:@"locations"];
+  }
 }
 
 @end
