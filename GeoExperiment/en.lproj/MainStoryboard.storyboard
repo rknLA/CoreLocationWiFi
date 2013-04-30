@@ -17,14 +17,52 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuZ-Ww-SEt">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="New GeoTracking Session">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="newSessionPressed:" destination="2" eventType="touchUpInside" id="uqQ-kY-c1C"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VYR-xB-SPS">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="qKR-GT-LiQ"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="trackLocationToggled:" destination="2" eventType="valueChanged" id="UKC-pM-sWz"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Toggle GeoTracking:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pkz-3Q-3Gy">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="VYR-xB-SPS" firstAttribute="top" secondItem="PuZ-Ww-SEt" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="0GA-CJ-dig"/>
                             <constraint firstAttribute="trailing" secondItem="8Wu-Cr-CsL" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="BFS-up-lUE"/>
+                            <constraint firstItem="PuZ-Ww-SEt" firstAttribute="top" secondItem="8Wu-Cr-CsL" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CGi-vw-n27"/>
                             <constraint firstItem="8Wu-Cr-CsL" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="TMI-fd-qDw"/>
+                            <constraint firstAttribute="trailing" secondItem="VYR-xB-SPS" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Zvf-DK-vdw"/>
+                            <constraint firstAttribute="trailing" secondItem="PuZ-Ww-SEt" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="a1Z-fK-jXW"/>
+                            <constraint firstItem="Pkz-3Q-3Gy" firstAttribute="centerY" secondItem="VYR-xB-SPS" secondAttribute="centerY" type="default" id="gSK-GF-Ea2"/>
+                            <constraint firstItem="VYR-xB-SPS" firstAttribute="leading" secondItem="Pkz-3Q-3Gy" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="rih-js-SsN"/>
+                            <constraint firstItem="Pkz-3Q-3Gy" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sTP-9P-iJL"/>
                             <constraint firstItem="8Wu-Cr-CsL" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="x8Z-o2-1dg"/>
+                            <constraint firstItem="PuZ-Ww-SEt" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="zth-Sf-qSe"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createSessionButton" destination="PuZ-Ww-SEt" id="OKS-H9-mEB"/>
+                        <outlet property="trackSwitch" destination="VYR-xB-SPS" id="UCk-9U-82L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
@@ -36,6 +74,12 @@
         </class>
         <class className="ViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="newSessionPressed:"/>
+                <relationship kind="action" name="trackLocationToggled:"/>
+                <relationship kind="outlet" name="createSessionButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="trackSwitch" candidateClass="UISwitch"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

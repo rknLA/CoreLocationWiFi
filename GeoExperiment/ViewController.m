@@ -15,6 +15,9 @@
 
 @implementation ViewController
 
+@synthesize trackSwitch;
+@synthesize createSessionButton;
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -32,6 +35,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)trackLocationToggled:(id)sender
+{
+  NSLog(@"TRACK SWITCH TOGGLED");
+}
+
+- (IBAction)newSessionPressed:(id)sender
+{
+  NSLog(@"New session, create a new dropbox file here");
 }
 
 @end
