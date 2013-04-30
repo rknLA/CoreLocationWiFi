@@ -18,6 +18,11 @@
 		E174E817172F848D001F472F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E174E816172F848D001F472F /* Default-568h@2x.png */; };
 		E174E81A172F848D001F472F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E174E818172F848D001F472F /* MainStoryboard.storyboard */; };
 		E174E81D172F848D001F472F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E174E81C172F848D001F472F /* ViewController.m */; };
+		E174E824172F84CF001F472F /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E823172F84CF001F472F /* Dropbox.framework */; };
+		E174E826172F8B17001F472F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E825172F8B17001F472F /* CFNetwork.framework */; };
+		E174E828172F8B1E001F472F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E827172F8B1E001F472F /* Security.framework */; };
+		E174E82A172F8B24001F472F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E829172F8B24001F472F /* SystemConfiguration.framework */; };
+		E174E82C172F8B2B001F472F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E82B172F8B2B001F472F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +42,11 @@
 		E174E819172F848D001F472F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		E174E81B172F848D001F472F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E174E81C172F848D001F472F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E174E823172F84CF001F472F /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		E174E825172F8B17001F472F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E174E827172F8B1E001F472F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E174E829172F8B24001F472F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E174E82B172F8B2B001F472F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,9 +54,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E174E82C172F8B2B001F472F /* QuartzCore.framework in Frameworks */,
+				E174E82A172F8B24001F472F /* SystemConfiguration.framework in Frameworks */,
+				E174E828172F8B1E001F472F /* Security.framework in Frameworks */,
+				E174E826172F8B17001F472F /* CFNetwork.framework in Frameworks */,
 				E174E801172F848D001F472F /* UIKit.framework in Frameworks */,
 				E174E803172F848D001F472F /* Foundation.framework in Frameworks */,
 				E174E805172F848D001F472F /* CoreGraphics.framework in Frameworks */,
+				E174E824172F84CF001F472F /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,9 +88,14 @@
 		E174E7FF172F848D001F472F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E174E823172F84CF001F472F /* Dropbox.framework */,
 				E174E800172F848D001F472F /* UIKit.framework */,
 				E174E802172F848D001F472F /* Foundation.framework */,
 				E174E804172F848D001F472F /* CoreGraphics.framework */,
+				E174E82B172F8B2B001F472F /* QuartzCore.framework */,
+				E174E829172F8B24001F472F /* SystemConfiguration.framework */,
+				E174E827172F8B1E001F472F /* Security.framework */,
+				E174E825172F8B17001F472F /* CFNetwork.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -260,6 +280,10 @@
 		E174E821172F848D001F472F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoExperiment/GeoExperiment-Prefix.pch";
 				INFOPLIST_FILE = "GeoExperiment/GeoExperiment-Info.plist";
@@ -271,6 +295,10 @@
 		E174E822172F848D001F472F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoExperiment/GeoExperiment-Prefix.pch";
 				INFOPLIST_FILE = "GeoExperiment/GeoExperiment-Info.plist";
