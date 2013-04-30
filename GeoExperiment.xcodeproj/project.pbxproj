@@ -24,6 +24,7 @@
 		E174E82A172F8B24001F472F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E829172F8B24001F472F /* SystemConfiguration.framework */; };
 		E174E82C172F8B2B001F472F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E82B172F8B2B001F472F /* QuartzCore.framework */; };
 		E174E82E172F8D5E001F472F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E174E82D172F8D5E001F472F /* CoreLocation.framework */; };
+		E174E831172F8F41001F472F /* DropboxGeoLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E174E830172F8F41001F472F /* DropboxGeoLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		E174E829172F8B24001F472F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E174E82B172F8B2B001F472F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E174E82D172F8D5E001F472F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E174E82F172F8F41001F472F /* DropboxGeoLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxGeoLogger.h; sourceTree = "<group>"; };
+		E174E830172F8F41001F472F /* DropboxGeoLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxGeoLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 				E174E81B172F848D001F472F /* ViewController.h */,
 				E174E81C172F848D001F472F /* ViewController.m */,
 				E174E807172F848D001F472F /* Supporting Files */,
+				E174E82F172F8F41001F472F /* DropboxGeoLogger.h */,
+				E174E830172F8F41001F472F /* DropboxGeoLogger.m */,
 			);
 			path = GeoExperiment;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				E174E80D172F848D001F472F /* main.m in Sources */,
 				E174E811172F848D001F472F /* AppDelegate.m in Sources */,
 				E174E81D172F848D001F472F /* ViewController.m in Sources */,
+				E174E831172F8F41001F472F /* DropboxGeoLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

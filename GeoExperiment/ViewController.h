@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate>
+@interface ViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UISwitch *trackSwitch;
-@property (strong, nonatomic) IBOutlet UIButton *createSessionButton;
+@property (strong, nonatomic) IBOutlet UIButton *beginSessionButton;
+@property (strong, nonatomic) IBOutlet UISwitch *significantSwitch;
 
-- (IBAction)trackLocationToggled:(id)sender;
 - (IBAction)newSessionPressed:(id)sender;
 
 @end

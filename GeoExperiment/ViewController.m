@@ -7,21 +7,25 @@
 //
 
 #import "ViewController.h"
-#import <Dropbox/Dropbox.h>
+#import "DropboxGeoLogger.h"
 
-@interface ViewController ()
+@interface ViewController () {
+  BOOL _tracking;
+}
 
 @end
 
 @implementation ViewController
 
-@synthesize trackSwitch;
-@synthesize createSessionButton;
+@synthesize beginSessionButton;
+@synthesize significantSwitch;
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+  
+  _tracking = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -37,14 +41,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)trackLocationToggled:(id)sender
-{
-  NSLog(@"TRACK SWITCH TOGGLED");
-}
 
 - (IBAction)newSessionPressed:(id)sender
 {
   NSLog(@"New session, create a new dropbox file here");
+  if (_tracking) {
+    [[DropboxGeoLogger sharedLogger] stopLogging];
+    _tracking = NO;
+    self.significantSwitch.enabled = YES;
+    [self.beginSessionButton setTitle:@"Begin GeoTracking Session" forState:UIControlStateNormal];
+  } else {
+    self.significantSwitch.enabled = NO;
+    [self.beginSessionButton setTitle:@"Stop Session" forState:UIControlStateNormal];
+    _tracking = YES;
+    [[DropboxGeoLogger sharedLogger] startLoggingWithSignificantChanges:self.significantSwitch.on];
+  }
 }
 
 @end
