@@ -44,23 +44,12 @@ typedef enum {
     [_locationManager setDelegate:self];
     _loggingState = NotLoggingState;
     _outputFile = nil;
-    
-    [self useNewOutputFile];
   }
   return self;
 }
 
 - (void)useNewOutputFile
-{
-  // write and close output file if it exists
-  if (_outputFile) {
-    [_outputFile writeData:[NSJSONSerialization dataWithJSONObject:_outputDict
-                                                            options:NSJSONWritingPrettyPrinted
-                                                              error:nil]
-                     error:nil];
-    [_outputFile close];
-  }
-  
+{  
   // create new output file based on current time.
   NSDate *now = [NSDate date];
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -68,7 +57,8 @@ typedef enum {
   NSString *nowString = [dateFormatter stringFromDate:now];
   nowString = [NSString stringWithFormat:@"%@.json", nowString];
   DBPath *newFilePath = [[DBPath root] childPath:nowString];
-  _outputFile = [[DBFilesystem sharedFilesystem] createFile:newFilePath error:nil];
+  DBError *err;
+  _outputFile = [[DBFilesystem sharedFilesystem] createFile:newFilePath error:&err];
   
   // reset output dict
   _outputDict = [[NSMutableDictionary alloc] init];
@@ -77,6 +67,7 @@ typedef enum {
 
 - (void)startLoggingWithSignificantChanges:(BOOL)significant
 {
+  [self useNewOutputFile];
   if (significant) {
     [_locationManager startMonitoringSignificantLocationChanges];
     _loggingState = LoggingSignificantChangesState;
@@ -93,6 +84,14 @@ typedef enum {
   } else if (_loggingState == LoggingSignificantChangesState) {
     [_locationManager stopMonitoringSignificantLocationChanges];
   }
+  
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_outputDict
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:nil];
+  [_outputFile writeData:jsonData
+                   error:nil];
+  [_outputFile close];
+  _outputFile = nil;
 }
 
 # pragma mark - CLLocationManagerDelegate methods
@@ -109,8 +108,22 @@ typedef enum {
   if (_loggingState != NotLoggingState) {
     // write them to dropbox!
     NSArray *existingLocations = [_outputDict objectForKey:@"locations"];
-    NSArray *newLocations = [existingLocations arrayByAddingObjectsFromArray:locations];
-    [_outputDict setObject:newLocations forKey:@"locations"];
+    NSMutableArray *newLocations = [NSMutableArray arrayWithCapacity:20];
+    for (CLLocation *location in locations) {
+      NSDictionary *loc = @{
+                             @"latitude": [NSNumber numberWithDouble:[location coordinate].latitude],
+                             @"longitude": [NSNumber numberWithDouble:[location coordinate].longitude],
+                             @"horizontal accuracy": [NSNumber numberWithDouble:[location horizontalAccuracy]],
+                             @"vertical accuracy": [NSNumber numberWithDouble:[location verticalAccuracy]],
+                             @"altitude": [NSNumber numberWithDouble:[location altitude]],
+                             @"timestamp": [[location timestamp] description],
+                             @"speed": [NSNumber numberWithDouble:[location speed]],
+                             @"course": [NSNumber numberWithDouble:[location course]]};
+      [newLocations addObject:loc];
+    }
+    
+    NSArray *concatenatedLocations = [existingLocations arrayByAddingObjectsFromArray:newLocations];
+    [_outputDict setObject:concatenatedLocations forKey:@"locations"];
   }
 }
 

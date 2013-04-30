@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 rknLA. All rights reserved.
 //
 
+#import <Dropbox/Dropbox.h>
 #import "ViewController.h"
 #import "DropboxGeoLogger.h"
 
@@ -30,8 +31,12 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-  if (![[DBAccountManager sharedManager] linkedAccount]) {
+  DBAccount *linkedAccount = [DBAccountManager sharedManager].linkedAccount;
+  if (!linkedAccount) {
     [[DBAccountManager sharedManager] linkFromController:self];
+  } else {
+    DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:linkedAccount];
+    [DBFilesystem setSharedFilesystem:filesystem];
   }
 }
 
@@ -44,7 +49,6 @@
 
 - (IBAction)newSessionPressed:(id)sender
 {
-  NSLog(@"New session, create a new dropbox file here");
   if (_tracking) {
     [[DropboxGeoLogger sharedLogger] stopLogging];
     _tracking = NO;

@@ -115,9 +115,9 @@
 				E174E818172F848D001F472F /* MainStoryboard.storyboard */,
 				E174E81B172F848D001F472F /* ViewController.h */,
 				E174E81C172F848D001F472F /* ViewController.m */,
-				E174E807172F848D001F472F /* Supporting Files */,
 				E174E82F172F8F41001F472F /* DropboxGeoLogger.h */,
 				E174E830172F8F41001F472F /* DropboxGeoLogger.m */,
+				E174E807172F848D001F472F /* Supporting Files */,
 			);
 			path = GeoExperiment;
 			sourceTree = "<group>";
@@ -336,6 +336,7 @@
 				E174E822172F848D001F472F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

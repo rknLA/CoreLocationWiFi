@@ -17,8 +17,6 @@
   DBAccountManager* accountMgr = [[DBAccountManager alloc] initWithAppKey:@"dksxy9q6pyci6xj" secret:@"zhcfn8xe5kniu8p"];
   [DBAccountManager setSharedManager:accountMgr];
   
-  
-  
   return YES;
 }
 							
