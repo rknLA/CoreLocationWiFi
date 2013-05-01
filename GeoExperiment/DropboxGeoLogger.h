@@ -12,6 +12,8 @@
 
 @interface DropboxGeoLogger : NSObject <CLLocationManagerDelegate>
 
+@property (strong, nonatomic) CLLocation *lastLocation;
+
 + (DropboxGeoLogger *)sharedLogger;
 
 - (void)useNewOutputFile;

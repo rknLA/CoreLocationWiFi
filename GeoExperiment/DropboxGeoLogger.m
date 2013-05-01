@@ -20,12 +20,19 @@ typedef enum {
   CLLocationManager *_locationManager;
   LoggingState _loggingState;
   DBFile *_outputFile;
-  NSMutableDictionary *_outputDict;
+  NSMutableDictionary * __strong _outputDict;
 }
 
 @end
 
 @implementation DropboxGeoLogger
+
+@synthesize lastLocation = _lastLocation;
+
+- (void)setLastLocation:(CLLocation *)lastLocation
+{
+  _lastLocation = lastLocation;
+}
 
 + (DropboxGeoLogger *)sharedLogger
 {
@@ -106,6 +113,10 @@ typedef enum {
   NSLog(@"Locations updated! %@", locations);
   
   if (_loggingState != NotLoggingState) {
+    
+    //update the output dictionary
+    [self setLastLocation:[locations objectAtIndex:([locations count] -1)]];
+    
     // write them to dropbox!
     NSArray *existingLocations = [_outputDict objectForKey:@"locations"];
     NSMutableArray *newLocations = [NSMutableArray arrayWithCapacity:20];
@@ -124,6 +135,13 @@ typedef enum {
     
     NSArray *concatenatedLocations = [existingLocations arrayByAddingObjectsFromArray:newLocations];
     [_outputDict setObject:concatenatedLocations forKey:@"locations"];
+    
+    // actuall write the file
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_outputDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    [_outputFile writeData:jsonData
+                     error:nil];
   }
 }
 

@@ -61,6 +61,7 @@
                     </view>
                     <connections>
                         <outlet property="beginSessionButton" destination="PuZ-Ww-SEt" id="2Ky-7I-Ws9"/>
+                        <outlet property="locationLabel" destination="5YA-Pp-Htk" id="Vfq-Pa-ryS"/>
                         <outlet property="significantSwitch" destination="LCo-TM-oaD" id="4EI-82-ig7"/>
                     </connections>
                 </viewController>
@@ -68,19 +69,6 @@
             </objects>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="newSessionPressed:"/>
-                <relationship kind="outlet" name="beginSessionButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="significantSwitch" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

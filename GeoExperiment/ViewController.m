@@ -20,6 +20,7 @@
 
 @synthesize beginSessionButton;
 @synthesize significantSwitch;
+@synthesize locationLabel;
 
 - (void)viewDidLoad
 {
@@ -49,16 +50,34 @@
 
 - (IBAction)newSessionPressed:(id)sender
 {
-  if (_tracking) {
+  if (_tracking)
+  {
     [[DropboxGeoLogger sharedLogger] stopLogging];
     _tracking = NO;
     self.significantSwitch.enabled = YES;
+    
     [self.beginSessionButton setTitle:@"Begin GeoTracking Session" forState:UIControlStateNormal];
-  } else {
+  }
+  else
+  {
     self.significantSwitch.enabled = NO;
     [self.beginSessionButton setTitle:@"Stop Session" forState:UIControlStateNormal];
     _tracking = YES;
+    [[DropboxGeoLogger sharedLogger] addObserver:self
+                                      forKeyPath:@"lastLocation"
+                                         options:NSKeyValueObservingOptionNew
+                                         context:nil];
     [[DropboxGeoLogger sharedLogger] startLoggingWithSignificantChanges:self.significantSwitch.on];
+  }
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([@"lastLocation" isEqualToString:keyPath]) {
+    NSLog(@"%@", change);
+    CLLocation *location = [change objectForKey:NSKeyValueChangeNewKey];
+    NSString *locString = [NSString stringWithFormat:@"(%.06f, %.06f)", location.coordinate.latitude, location.coordinate.longitude];
+    [self.locationLabel setText:locString];
   }
 }
 

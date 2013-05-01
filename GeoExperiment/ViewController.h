@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *beginSessionButton;
 @property (strong, nonatomic) IBOutlet UISwitch *significantSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 
 - (IBAction)newSessionPressed:(id)sender;
 
