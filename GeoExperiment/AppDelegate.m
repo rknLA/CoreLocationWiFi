@@ -14,7 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   // Override point for customization after application launch.
-  DBAccountManager* accountMgr = [[DBAccountManager alloc] initWithAppKey:@"dksxy9q6pyci6xj" secret:@"zhcfn8xe5kniu8p"];
+  DBAccountManager* accountMgr = [[DBAccountManager alloc] initWithAppKey:@"YOUR_APP_KEY" secret:@"YOUR_APP_SECRET"];
   [DBAccountManager setSharedManager:accountMgr];
   
   return YES;
